@@ -466,3 +466,53 @@ body {
 .modal-buttons button:last-child:hover {
     background: #e2e8f0;
 }
+/* ROLE SELECTOR */
+.role-selector {
+    margin-bottom: 0.9rem;
+}
+
+.role-label {
+    font-size: 0.82rem;
+    color: #718096;
+    margin-bottom: 0.5rem;
+}
+
+.role-options {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.role-option {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    padding: 0.6rem;
+    border: 1px solid #cbd5e0;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 0.88rem;
+    color: #4a5568;
+    transition: all 0.15s;
+    background: #fafafa;
+}
+
+.role-option input[type="radio"] {
+    width: auto;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 0;
+    accent-color: #1a4731;
+}
+
+.role-option.selected {
+    border-color: #1a4731;
+    background: #f0faf4;
+    color: #1a4731;
+    font-weight: 600;
+}
+
+.role-option:hover {
+    border-color: #2d6a4f;
+}

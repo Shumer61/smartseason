@@ -73,13 +73,31 @@ function Register({ onSwitch }) {
                         autoComplete="new-password"
                         required
                     />
-                    <select
-                        value={role}
-                        onChange={(e) => setRole(e.target.value)}
-                    >
-                        <option value="agent">Field Agent</option>
-                        <option value="admin">Admin</option>
-                    </select>
+                    <div className="role-selector">
+                        <p className="role-label">I am a</p>
+                        <div className="role-options">
+                            <label className={`role-option ${role === 'agent' ? 'selected' : ''}`}>
+                                <input
+                                    type="radio"
+                                    name="role"
+                                    value="agent"
+                                    checked={role === 'agent'}
+                                    onChange={() => setRole('agent')}
+                                />
+                                Field Agent
+                            </label>
+                            <label className={`role-option ${role === 'admin' ? 'selected' : ''}`}>
+                                <input
+                                    type="radio"
+                                    name="role"
+                                    value="admin"
+                                    checked={role === 'admin'}
+                                    onChange={() => setRole('admin')}
+                                />
+                                Admin
+                            </label>
+                        </div>
+                    </div>
                     {error && <p className="error">{error}</p>}
                     <button type="submit" disabled={loading}>
                         {loading ? 'Creating account...' : 'Register'}
@@ -87,7 +105,7 @@ function Register({ onSwitch }) {
                 </form>
                 <p className="auth-switch">
                     Already have an account?{' '}
-                    <span onClick={onSwitch}>Login</span>
+                    <span onClick={onSwitch}>Login here</span>
                 </p>
             </div>
         </div>
