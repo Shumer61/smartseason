@@ -15,17 +15,11 @@ const generateToken = (id) => {
 // Register
 router.post('/register', async (req, res) => {
     try {
-        const { name, email, password, role } = req.body
-        console.log('Step 1 - body received:', req.body)
-        
+        const { name, email, password } = req.body
         const userExists = await User.findOne({ email })
-        console.log('Step 2 - checked existing user')
-        
         if(userExists) return res.status(400).json({ message: 'User already exists' })
 
-        const user = await User.create({ name, email, password, role })
-        console.log('Step 3 - user created')
-        
+        const user = await User.create({ name, email, password, role: 'agent' })
         res.status(201).json({
             _id: user._id,
             name: user.name,
@@ -34,7 +28,6 @@ router.post('/register', async (req, res) => {
             token: generateToken(user._id)
         })
     } catch(error) {
-        console.log('ERROR CAUGHT:', error)
         res.status(500).json({ message: error.message })
     }
 })

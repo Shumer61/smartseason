@@ -6,7 +6,6 @@ function Register({ onSwitch }) {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [role, setRole] = useState('agent')
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
 
@@ -19,7 +18,7 @@ function Register({ onSwitch }) {
             const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/register`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ name, email, password, role })
+                body: JSON.stringify({ name, email, password })
             })
 
             const data = await response.json()
@@ -73,31 +72,6 @@ function Register({ onSwitch }) {
                         autoComplete="new-password"
                         required
                     />
-                    <div className="role-selector">
-                        <p className="role-label">I am a</p>
-                        <div className="role-options">
-                            <label className={`role-option ${role === 'agent' ? 'selected' : ''}`}>
-                                <input
-                                    type="radio"
-                                    name="role"
-                                    value="agent"
-                                    checked={role === 'agent'}
-                                    onChange={() => setRole('agent')}
-                                />
-                                Field Agent
-                            </label>
-                            <label className={`role-option ${role === 'admin' ? 'selected' : ''}`}>
-                                <input
-                                    type="radio"
-                                    name="role"
-                                    value="admin"
-                                    checked={role === 'admin'}
-                                    onChange={() => setRole('admin')}
-                                />
-                                Admin
-                            </label>
-                        </div>
-                    </div>
                     {error && <p className="error">{error}</p>}
                     <button type="submit" disabled={loading}>
                         {loading ? 'Creating account...' : 'Register'}
