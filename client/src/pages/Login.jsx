@@ -70,7 +70,7 @@ function Login({onSwitch}) {
                 </form>
                 <p classname="auth-switch">
                     No account yet?{''}
-                    <span onClick={onSwitch}>Register</span>
+                    <span onClick={onSwitch}>Register here</span>
                 </p>
             </div>
         </div>
