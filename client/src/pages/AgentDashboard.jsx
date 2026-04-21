@@ -74,6 +74,12 @@ function AgentDashboard() {
                         <h3>{summary.byStatus.Completed}</h3>
                         <p>Completed</p>
                     </div>
+                    <div className="stage-row">
+                        <span>Planted: {summary.byStage.Planted}</span>
+                        <span>Growing: {summary.byStage.Growing}</span>
+                        <span>Ready: {summary.byStage.Ready}</span>
+                        <span>Harvested: {summary.byStage.Harvested}</span>
+                    </div>
                 </div>
             )}
 

@@ -516,3 +516,17 @@ body {
 .role-option:hover {
     border-color: #2d6a4f;
 }
+.stage-row {
+    display: flex;
+    gap: 1.5rem;
+    padding: 0.5rem 2rem 1rem;
+    font-size: 0.83rem;
+    color: #718096;
+}
+
+.stage-row span {
+    background: white;
+    border: 1px solid #e2e8f0;
+    padding: 0.3rem 0.8rem;
+    border-radius: 3px;
+}
