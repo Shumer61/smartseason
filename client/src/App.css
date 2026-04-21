@@ -547,7 +547,8 @@ body {
 }
 .stage-row {
     display: flex;
-    gap: 1.5rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
     padding: 0.5rem 2rem 1rem;
     font-size: 0.83rem;
     color: #718096;
@@ -558,4 +559,5 @@ body {
     border: 1px solid #e2e8f0;
     padding: 0.3rem 0.8rem;
     border-radius: 3px;
+    white-space: nowrap;
 }
