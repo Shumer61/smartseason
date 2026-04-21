@@ -68,9 +68,9 @@ function Login({onSwitch}) {
                         {loading ? 'Logging in...' : 'Login'}
                     </button>
                 </form>
-                <p classname="auth-switch">
-                    No account yet?{''}
-                    <span onClick={onSwitch}>Register here</span>
+                <p className="auth-switch">
+                    No account yet?{' '}
+                    <span onClick={onSwitch}>Register</span>
                 </p>
             </div>
         </div>
