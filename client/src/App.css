@@ -219,6 +219,7 @@ body {
 }
 
 /* FORMS */
+/* FORMS */
 .field-form, .assign-form {
     background: white;
     margin: 0 2rem 1rem;
@@ -237,22 +238,44 @@ body {
 }
 
 .field-form input,
+.field-form select,
+.assign-form input,
 .assign-form select {
     display: block;
     width: 100%;
     padding: 0.65rem 0.9rem;
-    border: 1px solid #e2e8f0;
+    border: 1px solid #cbd5e0;
     border-radius: 3px;
     margin-bottom: 0.7rem;
     font-size: 0.88rem;
     outline: none;
-    background: #fafafa;
+    background: #fff;
+    color: #1a202c;
+    font-family: inherit;
+    appearance: auto;
 }
 
 .field-form input:focus,
+.field-form select:focus,
+.assign-form input:focus,
 .assign-form select:focus {
     border-color: #2d6a4f;
     background: #fff;
+}
+
+.field-form input::placeholder,
+.assign-form input::placeholder {
+    color: #a0aec0;
+}
+
+.field-form input[type="date"] {
+    color: #1a202c;
+    cursor: pointer;
+}
+
+.field-form input[type="date"]::-webkit-calendar-picker-indicator {
+    opacity: 0.6;
+    cursor: pointer;
 }
 
 .field-form button,
@@ -270,6 +293,12 @@ body {
 .field-form button:hover,
 .assign-form button:hover {
     background: #2d6a4f;
+}
+
+.field-form button:disabled,
+.assign-form button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
 }
 
 /* GRID */
