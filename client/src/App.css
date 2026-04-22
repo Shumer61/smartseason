@@ -53,29 +53,27 @@ body {
     font-size: 0.93rem;
     outline: none;
     transition: border 0.15s;
-    background: #fafafa;
+    background: #ffffff;
+    color: #1a202c;
+    appearance: auto;
 }
 
 .auth-card input:focus,
 .auth-card select:focus {
-    width: 100%;
-    padding: 0.7rem 0.9rem;
-    border: 1px solid #cbd5e0;
-    border-radius: 3px;
-    margin-bottom: 0.9rem;
-    font-size: 0.93rem;
-    outline: none;
-    transition: border 0.15s;
-    background: #f8f6f6;
+    border-color: #2d6a4f;
+    background: #ffffff;
     color: #1a202c;
-    appearance: auto;
 }
+
 .auth-card input:-webkit-autofill,
 .auth-card input:-webkit-autofill:hover,
-.auth-card input:-webkit-autofill:focus {
-    -webkit-text-fill-color: #1a202c;
-    -webkit-box-shadow: 0 0 0px 1000px #fff inset;
+.auth-card input:-webkit-autofill:focus,
+.auth-card input:-webkit-autofill:active {
+    -webkit-text-fill-color: #1a202c !important;
+    -webkit-box-shadow: 0 0 0px 1000px #ffffff inset !important;
+    box-shadow: 0 0 0px 1000px #ffffff inset !important;
     transition: background-color 5000s ease-in-out 0s;
+    caret-color: #1a202c;
 }
 
 .auth-card button {
