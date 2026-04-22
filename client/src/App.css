@@ -70,6 +70,13 @@ body {
     color: #1a202c;
     appearance: auto;
 }
+.auth-card input:-webkit-autofill,
+.auth-card input:-webkit-autofill:hover,
+.auth-card input:-webkit-autofill:focus {
+    -webkit-text-fill-color: #1a202c;
+    -webkit-box-shadow: 0 0 0px 1000px #fff inset;
+    transition: background-color 5000s ease-in-out 0s;
+}
 
 .auth-card button {
     width: 100%;
