@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useAuth } from '../context/AuthContext'
 import FieldCard from '../components/FieldCard'
 import UpdateStageForm from '../components/UpdateStageForm'
+import DashboardCharts from '../components/DashboardCharts'
 
 function AgentDashboard() {
     const { user, token, logout } = useAuth()
@@ -74,6 +75,7 @@ function AgentDashboard() {
                         <h3>{summary.byStatus.Completed}</h3>
                         <p>Completed</p>
                     </div>
+                    <DashboardCharts summary={summary} isAdmin={false} />
                     <div className="stage-row">
                         <span>Planted: {summary.byStage.Planted}</span>
                         <span>Growing: {summary.byStage.Growing}</span>

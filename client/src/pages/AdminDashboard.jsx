@@ -3,6 +3,7 @@ import { useAuth } from '../context/AuthContext'
 import FieldCard from '../components/FieldCard'
 import FieldForm from '../components/FieldForm'
 import AssignField from '../components/AssignField'
+import DashboardCharts from '../components/DashboardCharts'
 
 function AdminDashboard() {
     const { user, token, logout } = useAuth()
@@ -96,6 +97,7 @@ function AdminDashboard() {
                         <h3>{summary.byStatus.Completed}</h3>
                         <p>Completed</p>
                     </div>
+                    <DashboardCharts summary={summary} isAdmin={true} />
                     <div className="stage-row">
                         <span>Planted: {summary.byStage.Planted}</span>
                         <span>Growing: {summary.byStage.Growing}</span>
