@@ -26,7 +26,7 @@ function AdminDashboard() {
             const data = await response.json()
             if(response.ok) setFields(data)
         } catch(error) {
-            console.log('Error fetching fields:', error)
+            console.warn('could not load fields', error)
         }
     }
 
@@ -38,24 +38,24 @@ function AdminDashboard() {
             const data = await response.json()
             if(response.ok) setSummary(data)
         } catch(error) {
-            console.log('Error fetching summary:', error)
+            console.log(error)
         }
     }
 
-    const handleFieldCreated = (newField) => {
+    const onNewField = (newField) => {
         setFields(prev => [...prev, newField])
         fetchSummary()
         setShowFieldForm(false)
     }
 
-    const handleAssigned = (updatedField) => {
+    const onFieldAssigned = (updatedField) => {
         setFields(prev => prev.map(f =>
             f._id === updatedField._id ? updatedField : f
         ))
         setShowAssignForm(false)
     }
 
-    const handleDelete = async (id) => {
+    const removeField = async (id) => {
         try {
             const response = await fetch(`${import.meta.env.VITE_API_URL}/fields/${id}`, {
                 method: 'DELETE',
@@ -66,7 +66,7 @@ function AdminDashboard() {
                 fetchSummary()
             }
         } catch(error) {
-            console.log('Error deleting field:', error)
+            console.warn('delete failed', error)
         }
     }
 
@@ -98,17 +98,20 @@ function AdminDashboard() {
                         <h3>{summary.byStatus.Completed}</h3>
                         <p>Completed</p>
                     </div>
-                    <div className="charts-toggle-section">
-                      <button
-                      className="charts-toggle-btn"
-                      onClick={() => setShowCharts(!showCharts)}
-                      >
-                      {showCharts ? '▲ Hide Charts' : '▼ View Analytics'}
-                      </button>
-                      {showCharts && (
-                      <DashboardCharts summary={summary} isAdmin={true} />
-                      )}
-                      </div>
+                </div>
+            )}
+
+            {summary && (
+                <div className="charts-toggle-section">
+                    <button
+                        className="charts-toggle-btn"
+                        onClick={() => setShowCharts(!showCharts)}
+                    >
+                        {showCharts ? '▲ Hide Charts' : '▼ View Analytics'}
+                    </button>
+                    {showCharts && (
+                        <DashboardCharts summary={summary} isAdmin={true} />
+                    )}
                 </div>
             )}
 
@@ -122,11 +125,11 @@ function AdminDashboard() {
             </div>
 
             {showFieldForm && (
-                <FieldForm token={token} onFieldCreated={handleFieldCreated} />
+                <FieldForm token={token} onFieldCreated={onNewField} />
             )}
 
             {showAssignForm && (
-                <AssignField token={token} fields={fields} onAssigned={handleAssigned} />
+                <AssignField token={token} fields={fields} onAssigned={onFieldAssigned} />
             )}
 
             <div className="fields-grid">
@@ -137,7 +140,7 @@ function AdminDashboard() {
                             key={field._id}
                             field={field}
                             isAgent={false}
-                            onDelete={handleDelete}
+                            onDelete={removeField}
                         />
                     ))
                 }

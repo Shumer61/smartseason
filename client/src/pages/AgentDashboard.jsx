@@ -87,13 +87,28 @@ function AgentDashboard() {
                       <DashboardCharts summary={summary} isAdmin={false} />
                       )}
                       </div>
+                </div>
+            )}
+            {summary && (
+                <>
+                    <div className="charts-toggle-section">
+                        <button
+                            className="charts-toggle-btn"
+                            onClick={() => setShowCharts(!showCharts)}
+                        >
+                            {showCharts ? '▲ Hide Charts' : '▼ View Analytics'}
+                        </button>
+                        {showCharts && (
+                            <DashboardCharts summary={summary} isAdmin={false} />
+                        )}
+                    </div>
                     <div className="stage-row">
                         <span>Planted: {summary.byStage.Planted}</span>
                         <span>Growing: {summary.byStage.Growing}</span>
                         <span>Ready: {summary.byStage.Ready}</span>
                         <span>Harvested: {summary.byStage.Harvested}</span>
                     </div>
-                </div>
+                </>
             )}
 
             <div className="fields-grid">
