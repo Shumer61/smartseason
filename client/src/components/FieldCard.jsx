@@ -1,4 +1,9 @@
+import { useState } from 'react'
+import CropAdvisor from './CropAdvisor'
+
 function FieldCard({ field, onUpdate, onDelete, isAgent }) {
+    const [showAdvisor, setShowAdvisor] = useState(false)
+
     const statusColor = {
         'Active': '#22c55e',
         'At Risk': '#f59e0b',
@@ -36,12 +41,24 @@ function FieldCard({ field, onUpdate, onDelete, isAgent }) {
                         Update Field
                     </button>
                 )}
+                {isAgent && (
+                    <button className="advisor-btn" onClick={() => setShowAdvisor(true)}>
+                        AI Advice
+                    </button>
+                )}
                 {!isAgent && onDelete && (
                     <button className="delete-btn" onClick={() => onDelete(field._id)}>
                         Delete
                     </button>
                 )}
             </div>
+
+            {showAdvisor && (
+                <CropAdvisor
+                    field={field}
+                    onClose={() => setShowAdvisor(false)}
+                />
+            )}
         </div>
     )
 }
