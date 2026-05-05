@@ -125,6 +125,7 @@ body {
 .dashboard {
     min-height: 100vh;
     padding-bottom: 3rem;
+    display: block;
 }
 
 .dashboard-header {
@@ -225,7 +226,6 @@ body {
     background: #2d6a4f;
 }
 
-/* FORMS */
 /* FORMS */
 .field-form, .assign-form {
     background: white;
@@ -449,25 +449,58 @@ body {
     margin-bottom: 1.3rem;
     color: #1a4731;
     font-size: 1rem;
+    font-weight: 600;
 }
 
-.modal select,
-.modal textarea {
+.modal select {
     width: 100%;
     padding: 0.7rem 0.9rem;
-    border: 1px solid #e2e8f0;
+    border: 1px solid #cbd5e0;
     border-radius: 3px;
     margin-bottom: 0.9rem;
     font-size: 0.88rem;
     outline: none;
     font-family: inherit;
-    background: #fafafa;
+    background: #ffffff;
+    color: #1a202c;
+    appearance: auto;
+    cursor: pointer;
+    height: auto;
+    min-height: 2.5rem;
 }
 
-.modal select:focus,
+.modal select:focus {
+    border-color: #2d6a4f;
+}
+
+.modal select option {
+    background: #ffffff;
+    color: #1a202c;
+    padding: 0.5rem;
+    font-size: 0.88rem;
+}
+
+.modal textarea {
+    width: 100%;
+    padding: 0.7rem 0.9rem;
+    border: 1px solid #cbd5e0;
+    border-radius: 3px;
+    margin-bottom: 0.9rem;
+    font-size: 0.88rem;
+    outline: none;
+    font-family: inherit;
+    background: #ffffff;
+    color: #1a202c;
+    resize: vertical;
+    min-height: 80px;
+}
+
 .modal textarea:focus {
     border-color: #2d6a4f;
-    background: #fff;
+}
+
+.modal textarea::placeholder {
+    color: #a0aec0;
 }
 
 .modal-buttons {
@@ -482,7 +515,6 @@ body {
     border-radius: 3px;
     cursor: pointer;
     font-size: 0.88rem;
-    transition: opacity 0.2s;
 }
 
 .modal-buttons button:first-child {
@@ -574,8 +606,8 @@ body {
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 1rem;
     padding: 1rem 0 0.5rem;
+    width: 100%;
 }
-
 .chart-card {
     background: white;
     border: 1px solid #e2e8f0;
@@ -594,6 +626,8 @@ body {
 .charts-toggle-section {
     padding: 0 2rem;
     margin-bottom: 0.5rem;
+    clear: both;
+    width: 100%;
 }
 
 .charts-toggle-btn {
