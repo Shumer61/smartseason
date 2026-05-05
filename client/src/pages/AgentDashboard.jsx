@@ -76,17 +76,6 @@ function AgentDashboard() {
                         <h3>{summary.byStatus.Completed}</h3>
                         <p>Completed</p>
                     </div>
-                    <div className="charts-toggle-section">
-                      <button
-                      className="charts-toggle-btn"
-                      onClick={() => setShowCharts(!showCharts)}
-                      >
-                      {showCharts ? '▲ Hide Charts' : '▼ View Analytics'}
-                      </button>
-                      {showCharts && (
-                      <DashboardCharts summary={summary} isAdmin={false} />
-                      )}
-                      </div>
                 </div>
             )}
             {summary && (
