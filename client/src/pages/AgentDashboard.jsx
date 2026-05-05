@@ -9,6 +9,7 @@ function AgentDashboard() {
     const [fields, setFields] = useState([])
     const [summary, setSummary] = useState(null)
     const [selectedField, setSelectedField] = useState(null)
+    const [showCharts, setShowCharts] = useState(false)
 
     useEffect(() => {
         fetchFields()
@@ -75,7 +76,17 @@ function AgentDashboard() {
                         <h3>{summary.byStatus.Completed}</h3>
                         <p>Completed</p>
                     </div>
-                    <DashboardCharts summary={summary} isAdmin={false} />
+                    <div className="charts-toggle-section">
+                      <button
+                      className="charts-toggle-btn"
+                      onClick={() => setShowCharts(!showCharts)}
+                      >
+                      {showCharts ? '▲ Hide Charts' : '▼ View Analytics'}
+                      </button>
+                      {showCharts && (
+                      <DashboardCharts summary={summary} isAdmin={false} />
+                      )}
+                      </div>
                     <div className="stage-row">
                         <span>Planted: {summary.byStage.Planted}</span>
                         <span>Growing: {summary.byStage.Growing}</span>

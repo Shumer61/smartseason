@@ -11,6 +11,7 @@ function AdminDashboard() {
     const [summary, setSummary] = useState(null)
     const [showFieldForm, setShowFieldForm] = useState(false)
     const [showAssignForm, setShowAssignForm] = useState(false)
+    const [showCharts, setShowCharts] = useState(false)
 
     useEffect(() => {
         fetchFields()
@@ -97,13 +98,17 @@ function AdminDashboard() {
                         <h3>{summary.byStatus.Completed}</h3>
                         <p>Completed</p>
                     </div>
-                    <DashboardCharts summary={summary} isAdmin={true} />
-                    <div className="stage-row">
-                        <span>Planted: {summary.byStage.Planted}</span>
-                        <span>Growing: {summary.byStage.Growing}</span>
-                        <span>Ready: {summary.byStage.Ready}</span>
-                        <span>Harvested: {summary.byStage.Harvested}</span>
-                    </div>
+                    <div className="charts-toggle-section">
+                      <button
+                      className="charts-toggle-btn"
+                      onClick={() => setShowCharts(!showCharts)}
+                      >
+                      {showCharts ? '▲ Hide Charts' : '▼ View Analytics'}
+                      </button>
+                      {showCharts && (
+                      <DashboardCharts summary={summary} isAdmin={true} />
+                      )}
+                      </div>
                 </div>
             )}
 
