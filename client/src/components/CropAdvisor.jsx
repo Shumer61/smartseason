@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-function CropAdvisor({ field, onClose }) {
+function CropAdvisor({ field, token, onClose }) {
     const [observation, setObservation] = useState('')
     const [advice, setAdvice] = useState(null)
     const [loading, setLoading] = useState(false)
@@ -34,18 +34,31 @@ Based on this information provide structured advice in the following JSON format
 
         try {
             const response = await fetch(
-                `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${import.meta.env.VITE_GEMINI_KEY}`,
+                `${import.meta.env.VITE_API_URL}/advisor`,
                 {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        contents: [{ parts: [{ text: prompt }] }]
-                    })
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ prompt })
                 }
             )
 
+            if(response.status === 429) {
+                setError('Advisor is busy — please try again in a minute')
+                setLoading(false)
+                return
+            }
+
+            if(!response.ok) {
+                setError('Could not reach advisor')
+                setLoading(false)
+                return
+            }
+
             const data = await response.json()
-            const raw = data.candidates?.[0]?.content?.parts?.[0]?.text
+            const raw = data.text
 
             if(!raw) {
                 setError('No response from advisor')
@@ -59,7 +72,7 @@ Based on this information provide structured advice in the following JSON format
 
         } catch(err) {
             setError('Could not get advice right now')
-            console.log(err)
+            console.warn('advisor request failed')
         }
 
         setLoading(false)

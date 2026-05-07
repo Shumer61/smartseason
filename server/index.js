@@ -18,10 +18,13 @@ app.use(express.json())
 const authRoutes = require('./routes/auth')
 const fieldRoutes = require('./routes/fields')
 const dashboardRoutes = require('./routes/dashboard')
+const advisorRoute = require('./routes/advisor'
 
 app.use('/auth', authRoutes)
 app.use('/fields', fieldRoutes)
 app.use('/dashboard', dashboardRoutes)
+app.use('/advisor', advisorRoute)
+
 
 app.get('/', (req, res) => {
     res.json({ message: 'SmartSeason API is running' })

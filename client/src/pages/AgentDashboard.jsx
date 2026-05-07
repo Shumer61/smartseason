@@ -108,6 +108,7 @@ function AgentDashboard() {
                             key={field._id}
                             field={field}
                             isAgent={true}
+                            token={token}
                             onUpdate={setSelectedField}
                         />
                     ))

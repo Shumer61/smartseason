@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import CropAdvisor from './CropAdvisor'
 
-function FieldCard({ field, onUpdate, onDelete, isAgent }) {
+function FieldCard({ field, onUpdate, onDelete, isAgent, token }) {
     const [showAdvisor, setShowAdvisor] = useState(false)
 
     const statusColor = {
