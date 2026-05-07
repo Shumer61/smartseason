@@ -56,6 +56,7 @@ function FieldCard({ field, onUpdate, onDelete, isAgent, token }) {
             {showAdvisor && (
                 <CropAdvisor
                     field={field}
+                    token={token}
                     onClose={() => setShowAdvisor(false)}
                 />
             )}
