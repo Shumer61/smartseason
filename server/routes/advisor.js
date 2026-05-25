@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const { protect } = require('../middleware/auth')
+const fetch = require('node-fetch');
 
 router.post('/', protect, async (req, res) => {
     try {
