@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const { protect } = require('../middleware/auth')
-const fetch = require('node-fetch');
+const fetch = require('node-fetch').default;
 
 router.post('/', protect, async (req, res) => {
     try {
@@ -19,6 +19,7 @@ router.post('/', protect, async (req, res) => {
         }
 
         console.log('Advisor route: Making request to Gemini API')
+        console.log('Advisor route: fetch type:', typeof fetch)
         const response = await fetch(
             `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${process.env.GEMINI_KEY}`,
             {
