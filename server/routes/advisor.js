@@ -4,6 +4,7 @@ const { protect } = require('../middleware/auth')
 const fetch = require('node-fetch').default;
 
 router.post('/', protect, async (req, res) => {
+    console.log('Advisor route: Request received, user:', req.user ? req.user.id : 'no user')
     try {
         const { prompt } = req.body
 
@@ -61,7 +62,7 @@ router.post('/', protect, async (req, res) => {
             // Only include error details in development
             ...(process.env.NODE_ENV === 'development' && { error: error.message })
         })
-    }
+    })
 })
 
 module.exports = router
