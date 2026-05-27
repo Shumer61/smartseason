@@ -62,7 +62,7 @@ router.post('/', protect, async (req, res) => {
             // Only include error details in development
             ...(process.env.NODE_ENV === 'development' && { error: error.message })
         })
-    })
-})
+    }
+});
 
 module.exports = router
