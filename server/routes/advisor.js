@@ -18,6 +18,7 @@ router.post('/', protect, async (req, res) => {
             return res.status(500).json({ message: 'Server configuration error' })
         }
 
+        console.log('Advisor route: Making request to Gemini API')
         const response = await fetch(
             `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${process.env.GEMINI_KEY}`,
             {
@@ -29,6 +30,8 @@ router.post('/', protect, async (req, res) => {
             }
         )
 
+        console.log(`Advisor route: Gemini API responded with status: ${response.status}`)
+        
         // Handle non-2xx responses
         if (!response.ok) {
             const errorText = await response.text()
@@ -45,6 +48,7 @@ router.post('/', protect, async (req, res) => {
         }
 
         const data = await response.json()
+        console.log('Advisor route: Gemini response data:', JSON.stringify(data).substring(0, 200) + '...')
         const text = data.candidates?.[0]?.content?.parts?.[0]?.text
 
         if(!text) {
@@ -52,6 +56,7 @@ router.post('/', protect, async (req, res) => {
             return res.status(500).json({ message: 'No response from advisor' })
         }
 
+        console.log('Advisor route: Sending response to client')
         res.json({ text })
 
     } catch(error) {
