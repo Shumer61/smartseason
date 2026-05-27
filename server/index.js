@@ -9,7 +9,8 @@ connectDB()
 app.use(cors({
     origin: [
         'http://localhost:5173',
-        /\.vercel\.app$/
+        /\.vercel\.app$/,
+        /\.onrender\.com$/
     ],
     credentials: true
 }))
