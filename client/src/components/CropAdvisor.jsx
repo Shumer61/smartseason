@@ -72,7 +72,7 @@ Based on this information provide structured advice in the following JSON format
 
         } catch(err) {
             setError('Could not get advice right now')
-            console.warn('advisor request failed')
+            console.warn('advisor request failed', err)
         }
 
         setLoading(false)

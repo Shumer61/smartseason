@@ -65,6 +65,28 @@ router.post('/', protect, async (req, res) => {
         // Check which AI provider to use
         const aiProvider = process.env.AI_PROVIDER || 'gemini'
         
+        // Helper function to process raw text into advice object and return JSON string
+        function processAdvice(rawText) {
+            let adviceObj;
+            try {
+                const cleaned = rawText.replace(/```json|```/g, '').trim();
+                const parsed = JSON.parse(cleaned);
+                if (parsed.assessment && parsed.issue && parsed.action && parsed.urgency) {
+                    adviceObj = parsed;
+                } else {
+                    throw new Error('Missing required fields');
+                }
+            } catch (e) {
+                adviceObj = {
+                    assessment: rawText.substring(0, 100) + (rawText.length > 100 ? '...' : ''),
+                    issue: 'Unable to determine specific issue from advisor response',
+                    action: 'Please consult with a human expert for advice',
+                    urgency: 'Medium'
+                };
+            }
+            return JSON.stringify(adviceObj);
+        }
+
         // Try primary provider
         if (aiProvider === 'huggingface') {
             try {
@@ -119,7 +141,8 @@ router.post('/', protect, async (req, res) => {
 
                 if(text && text.trim()) {
                     console.log('Successfully got response from Hugging Face')
-                    res.json({ text })
+                    const adviceJson = processAdvice(text)
+                    res.json({ text: adviceJson })
                     return
                 } else {
                     console.error('No text in Hugging Face response:', data)
@@ -167,7 +190,8 @@ router.post('/', protect, async (req, res) => {
 
             if(text && text.trim()) {
                 console.log('Successfully got response from Gemini')
-                res.json({ text })
+                const adviceJson = processAdvice(text)
+                res.json({ text: adviceJson })
                 return
             } else {
                 console.error('No text in Gemini response:', data)
@@ -181,7 +205,8 @@ router.post('/', protect, async (req, res) => {
         // If both APIs fail, use rule-based fallback
         console.log('Using rule-based fallback response')
         const fallbackText = getFallbackResponse(prompt)
-        res.json({ text: fallbackText })
+        const adviceJson = processAdvice(fallbackText)
+        res.json({ text: adviceJson })
 
     } catch(error) {
         console.error('Advisor route error:', error)
