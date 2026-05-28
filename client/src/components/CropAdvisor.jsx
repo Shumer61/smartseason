@@ -13,7 +13,15 @@ function CropAdvisor({ field, token, onClose }) {
         setAdvice(null)
 
         const prompt = `
-You are an agricultural field advisor. A field agent has provided the following information:
+You are an expert agricultural advisor. Respond ONLY with a valid JSON object that has exactly these keys:
+"assessment", "issue", "action", "urgency".
+No extra text, no markdown, no explanations.
+
+Example:
+Field: Tomato, Observation: Yellow leaves.
+Output: {"assessment":"The tomato plant shows signs of nutrient deficiency.","issue":"Likely nitrogen deficiency.","action":"Apply a balanced fertilizer and ensure proper watering.","urgency":"Medium"}
+
+Now answer the following:
 
 Field Name: ${field.name}
 Crop Type: ${field.cropType}
@@ -22,15 +30,7 @@ Current Stage: ${field.stage}
 Current Status: ${field.status}
 
 Agent Observation: ${observation}
-
-Based on this information provide structured advice in the following JSON format only, no extra text:
-{
-  "assessment": "one sentence summary of the situation",
-  "issue": "what is likely wrong or what to watch for",
-  "action": "specific steps the agent should take",
-  "urgency": "Low or Medium or High"
-}
-`
+`;
 
         try {
             const response = await fetch(

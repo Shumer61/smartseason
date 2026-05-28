@@ -96,25 +96,26 @@ router.post('/', protect, async (req, res) => {
                     throw new Error('HF_TOKEN missing')
                 }
 
-                const model = process.env.HF_MODEL || 'google/flan-t5-xl'
-                const response = await fetch(
-                    `https://api-inference.huggingface.co/models/${model}`,
-                    {
-                        method: 'POST',
-                        headers: { 
-                            'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${process.env.HF_TOKEN}`
-                        },
-                        body: JSON.stringify({
-                            inputs: prompt,
-                            parameters: {
-                                max_new_tokens: 500,
-                                temperature: 0.7,
-                                return_full_text: false
-                            }
-                        })
-                    }
-                )
+const model = process.env.HF_MODEL || 'google/flan-t5-xxl'
+                 const response = await fetch(
+                     `https://api-inference.huggingface.co/models/${model}`,
+                     {
+                         method: 'POST',
+                         headers: { 
+                             'Content-Type': 'application/json',
+                             'Authorization': `Bearer ${process.env.HF_TOKEN}`
+                         },
+                         body: JSON.stringify({
+                             inputs: prompt,
+                             parameters: {
+                                 max_new_tokens: 250,
+                                 temperature: 0.2,
+                                 top_p: 0.9,
+                                 return_full_text: false
+                             }
+                         })
+                     }
+                 )
 
                 // Handle non-2xx responses
                 if (!response.ok) {
